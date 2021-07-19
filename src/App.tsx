@@ -1,14 +1,15 @@
-// import { FC } from "react"
+
 import { Column } from "./Column"
-// import { Card } from "./Card"
-import { AddNewItem } from "./AddNewItem"
+
 import { AppContainer } from "./styles"
 import { useAppState } from "./state/AppStateContext"
+import { AddNewItem } from "./AddNewItem"
+import { addList } from "./state/actions"
 
 
 
 export const App = () => {
-  const {lists } = useAppState()
+  const { lists, dispatch } = useAppState()
 
   return (
     <AppContainer>
@@ -16,7 +17,7 @@ export const App = () => {
         <Column text={list.text} key={list.id} id={list.id} />
       ))}
       
-      <AddNewItem toggleButtonText="+ Add another list" onAdd={console.log} />
+      <AddNewItem toggleButtonText="+ Add another list" onAdd={text => dispatch(addList(text))} />
     </AppContainer>
   )
 }
