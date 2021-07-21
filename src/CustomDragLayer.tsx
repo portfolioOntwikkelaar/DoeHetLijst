@@ -5,6 +5,7 @@ import {
   DragPreviewWrapper
 } from "./styles"
 import { useAppState } from "./state/AppStateContext"
+import { Card } from "./Card"
 
 export const CustomDragLayer = () => {
   const { draggedItem } = useAppState()
@@ -15,11 +16,20 @@ export const CustomDragLayer = () => {
   return draggedItem && currentOffset ? (
     <CustomDragLayerContainer>
       <DragPreviewWrapper position={currentOffset}>
+      {draggedItem.type === "COLUMN" ? (
         <Column
           id={draggedItem.id}
           text={draggedItem.text}
           isPreview
         />
+        ) : (
+          <Card
+            columnId={draggedItem.columnId}
+            isPreview
+            id={draggedItem.id}
+            text={draggedItem.text}
+          />
+        )}
       </DragPreviewWrapper>
     </CustomDragLayerContainer>
   ) : null
